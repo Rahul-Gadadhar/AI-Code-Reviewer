@@ -1,8 +1,11 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Set up Google Gemini API key
-GEMINI_API_KEY = "API_KEY_HERE"
+# Google Gemini API key via Streamlit
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+if not GEMINI_API_KEY:
+    st.error("API key not found. Please set GEMINI_API_KEY in Streamlit Secrets.")
+    
 genai.configure(api_key=GEMINI_API_KEY)
 
 def review_code(user_code):
